@@ -50,6 +50,18 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
+        /* Estilo para la imagen del índice */
+        .indice-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(11, 75, 87, 0.1);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         h1 {
             font-weight: normal;
             color: var(--accent-color); 
@@ -374,7 +386,11 @@
         <!-- Pestaña 2: Índice de Coros -->
         <main id="vista-indice" class="view-section">
             <div id="contenedor-lista">
-                <h2 style="text-align: center; font-weight: normal; margin-top:0; color: var(--accent-color);">Repertorio de Coros</h2>
+                <h2 style="text-align: center; font-weight: normal; margin-top:0; color: var(--accent-color); margin-bottom: 25px;">Repertorio de Coros</h2>
+                
+                <!-- IMAGEN DEL ÍNDICE AGREGADA AQUÍ -->
+                <img src="Indice Coros 2025.jpg" alt="Índice de Coros 2025" class="indice-img">
+
                 <input type="text" id="buscador" class="search-bar" placeholder="Buscar un coro por título..." onkeyup="filtrarCoros()">
                 <ul id="lista-coros" class="coros-list">
                     <!-- Los coros se cargarán aquí -->
