@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reunión de Jóvenes Concepción</title>
     <style>
-        /* Tema sobrio, tranquilo y elegante */
+        /* Tema adaptado al color del logo (Teal profundo) */
         :root {
-            --bg-color: #f7f6f2; 
-            --text-color: #2c3e50; 
-            --accent-color: #5d6d7e; 
+            --bg-color: #f2f6f7; /* Fondo general muy suave, ligeramente azulado */
+            --text-color: #1f363d; /* Texto oscuro con un toque del color del logo */
+            --accent-color: #0b4b57; /* El color exacto del fondo de tu logo */
+            --accent-light: #167080; /* Versión un poco más clara para hover */
             --card-bg: #ffffff;
-            --border: #e0ded7;
+            --border: #d0e0e3;
         }
 
         body {
@@ -32,14 +33,26 @@
 
         header {
             text-align: center;
-            padding: 40px 20px;
-            border-bottom: 1px solid var(--border);
+            padding: 40px 20px 30px 20px;
+            border-bottom: 2px solid var(--accent-color); /* Línea divisoria con el color del logo */
             margin-bottom: 30px;
+            background-color: var(--card-bg);
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 10px rgba(11, 75, 87, 0.05);
+        }
+
+        /* Estilo para el Logo */
+        .logo {
+            max-width: 180px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         h1 {
             font-weight: normal;
-            color: var(--text-color);
+            color: var(--accent-color); /* Título principal con el color del logo */
             margin: 0 0 10px 0;
         }
 
@@ -56,16 +69,17 @@
             border: none;
             font-size: 16px;
             font-family: inherit;
-            color: var(--accent-color);
+            color: var(--accent-light);
             cursor: pointer;
-            padding: 5px 10px;
-            border-bottom: 2px solid transparent;
+            padding: 8px 16px;
+            border-bottom: 3px solid transparent;
             transition: all 0.3s;
         }
 
         nav button:hover, nav button.active {
-            border-bottom: 2px solid var(--text-color);
-            color: var(--text-color);
+            border-bottom: 3px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: bold;
         }
 
         /* Vistas (Pestañas) */
@@ -74,7 +88,7 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(11, 75, 87, 0.08);
             border: 1px solid var(--border);
         }
 
@@ -104,31 +118,33 @@
             color: white;
             text-decoration: none;
             padding: 12px 25px;
-            border-radius: 4px;
+            border-radius: 6px;
             width: 80%;
             max-width: 400px;
             text-align: center;
             font-family: inherit;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
             box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(11, 75, 87, 0.2);
         }
 
         .btn-link:hover {
-            background-color: var(--text-color);
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
         }
 
         /* Cuadro elegante de horarios */
         .schedule-box {
             background-color: var(--bg-color);
             border: 1px solid var(--border);
+            border-left: 5px solid var(--accent-color); /* Acento visual en el cuadro */
             border-radius: 8px;
             padding: 30px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .schedule-box h3 {
             margin-top: 0;
-            color: var(--text-color);
+            color: var(--accent-color);
             border-bottom: 1px solid var(--border);
             padding-bottom: 15px;
             font-weight: normal;
@@ -138,7 +154,7 @@
         .schedule-box h4 {
             font-weight: normal;
             margin-bottom: 10px;
-            color: var(--accent-color);
+            color: var(--accent-light);
             font-style: italic;
         }
 
@@ -153,7 +169,7 @@
         
         .fechas-2026 {
             font-size: 0.9em;
-            color: var(--accent-color);
+            color: var(--accent-light);
             line-height: 1.8;
             margin-top: -10px;
             margin-bottom: 25px;
@@ -165,10 +181,16 @@
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 16px;
             box-sizing: border-box;
             font-family: inherit;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(11, 75, 87, 0.3);
         }
 
         .coros-list {
@@ -178,18 +200,19 @@
             max-height: 500px;
             overflow-y: auto;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
         .coros-list li {
             padding: 12px 15px;
             border-bottom: 1px solid var(--border);
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, color 0.2s;
         }
 
         .coros-list li:hover {
-            background-color: var(--bg-color);
+            background-color: var(--accent-color);
+            color: white;
         }
 
         .coros-list li:last-child {
@@ -211,16 +234,18 @@
 
         .btn-volver {
             background: none;
-            border: 1px solid var(--border);
+            border: 1px solid var(--accent-color);
             padding: 8px 16px;
             cursor: pointer;
             font-family: inherit;
-            border-radius: 4px;
-            color: var(--text-color);
+            border-radius: 6px;
+            color: var(--accent-color);
+            transition: all 0.3s;
         }
 
         .btn-volver:hover {
-            background-color: var(--bg-color);
+            background-color: var(--accent-color);
+            color: white;
         }
 
         /* Adaptabilidad para móviles */
@@ -229,7 +254,7 @@
                 padding: 20px 15px;
             }
             header {
-                padding: 20px 10px;
+                padding: 30px 10px 20px 10px;
             }
             .btn-link {
                 width: 100%;
@@ -243,6 +268,8 @@
 <body>
 
     <header>
+        <!-- Logo agregado -->
+        <img src="1 Ending 2024.jpg" alt="Logo RJ" class="logo">
         <h1>Reunión de Jóvenes Concepción</h1>
         <p><i>Recursos, Horarios y Coros del Evangelio</i></p>
     </header>
@@ -265,15 +292,14 @@
                 <a href="https://www.youtube.com/@cristianosconcepcion4299" target="_blank" class="btn-link">YouTube Oficial Asamblea</a>
             </div>
 
-            <!-- Horarios de Reunión Actualizados -->
             <div class="schedule-box">
-                <h3>Horarios de Reunión de Jóvenes</h3>
+                <h3>Horarios de Reunión</h3>
                 <p><strong>Reunión de Jóvenes:</strong> sábado por medio, de 17.00 a 19.30 hrs, con once incluida.</p>
                 <p class="fechas-2026">
                     <strong>Fechas 2026:</strong> 28/03/2026 - 11/04/2026 - 25/04/2026 - 09/05/2026 - 23/05/2026 - 06/06/2026 - 20/06/2026 - 04/07/2026 - 18/07/2026 - 01/08/2026 - 15/08/2026 - 29/08/2026 - 12/09/2026 - 26/09/2026 - 10/10/2026 - 24/10/2026 - 07/11/2026 - 21/11/2026
                 </p>
                 
-                <h4>Reuniones regulares de la Asamblea de Concepción:</h4>
+                <h4>Reuniones regulares:</h4>
                 <ul>
                     <li><strong>Domingo:</strong> 09.30 hrs Cena del Señor, 11:00 hrs Escuela Dominical, 17:00 hrs Predicación del Evangelio Virtual.</li>
                     <li><strong>Martes:</strong> 19.00 hrs Enseñanza de la Biblia.</li>
@@ -284,7 +310,7 @@
 
         <main id="vista-indice" class="view-section">
             <div id="contenedor-lista">
-                <h2 style="text-align: center; font-weight: normal; margin-top:0;">Repertorio de Coros</h2>
+                <h2 style="text-align: center; font-weight: normal; margin-top:0; color: var(--accent-color);">Repertorio de Coros</h2>
                 <input type="text" id="buscador" class="search-bar" placeholder="Buscar un coro por título..." onkeyup="filtrarCoros()">
                 <ul id="lista-coros" class="coros-list">
                     <!-- Los coros se cargarán aquí -->
@@ -293,7 +319,7 @@
 
             <div id="vista-letra">
                 <button class="btn-volver" onclick="volverAlIndice()">← Volver al índice</button>
-                <h2 id="titulo-coro-actual" style="font-weight: normal; margin-top: 20px;"></h2>
+                <h2 id="titulo-coro-actual" style="font-weight: normal; margin-top: 20px; color: var(--accent-color);"></h2>
                 <div id="letra-coro-actual" class="letra-contenido"></div>
             </div>
         </main>
