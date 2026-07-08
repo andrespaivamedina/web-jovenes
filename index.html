@@ -253,6 +253,59 @@
             color: white;
         }
 
+        /* Estilos del Formulario de Contacto */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: var(--bg-color);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(11, 75, 87, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button.btn-submit {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: inherit;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(11, 75, 87, 0.2);
+        }
+
+        button.btn-submit:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
         /* Adaptabilidad para móviles */
         @media (max-width: 600px) {
             .view-section {
@@ -282,11 +335,14 @@
     </header>
 
     <div class="container">
+        <!-- Navegación actualizada con 3 pestañas -->
         <nav>
             <button id="btn-inicio" class="active" onclick="cambiarVista('inicio')">Inicio</button>
             <button id="btn-indice" onclick="cambiarVista('indice')">Índice de Coros</button>
+            <button id="btn-contacto" onclick="cambiarVista('contacto')">Contacto</button>
         </nav>
 
+        <!-- Pestaña 1: Inicio -->
         <main id="vista-inicio" class="view-section active">
             
             <p class="bienvenida">
@@ -315,6 +371,7 @@
             </div>
         </main>
 
+        <!-- Pestaña 2: Índice de Coros -->
         <main id="vista-indice" class="view-section">
             <div id="contenedor-lista">
                 <h2 style="text-align: center; font-weight: normal; margin-top:0; color: var(--accent-color);">Repertorio de Coros</h2>
@@ -329,6 +386,31 @@
                 <h2 id="titulo-coro-actual" style="font-weight: normal; margin-top: 20px; color: var(--accent-color);"></h2>
                 <div id="letra-coro-actual" class="letra-contenido"></div>
             </div>
+        </main>
+
+        <!-- Pestaña 3: Contacto (NUEVA) -->
+        <main id="vista-contacto" class="view-section">
+            <h2 style="text-align: center; font-weight: normal; margin-top:0; color: var(--accent-color);">Contacto y Preguntas</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Si tienes alguna pregunta o deseas comunicarte con nosotros, escríbenos llenando el siguiente formulario.</p>
+            
+            <form onsubmit="prepararCorreo(event)">
+                <div class="form-group">
+                    <label for="contacto-nombre">Tu nombre:</label>
+                    <input type="text" id="contacto-nombre" placeholder="Ej. Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="contacto-asunto">Asunto:</label>
+                    <input type="text" id="contacto-asunto" placeholder="Ej. Pregunta sobre reuniones" required>
+                </div>
+                <div class="form-group">
+                    <label for="contacto-mensaje">Tu mensaje:</label>
+                    <textarea id="contacto-mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Preparar Mensaje</button>
+                <p style="font-size: 13px; text-align: center; color: var(--accent-light); margin-top: 15px;">
+                    * Al hacer clic, se abrirá tu aplicación de correo (Gmail, Outlook, etc.) con el mensaje listo para ser enviado a nuestros correos oficiales.
+                </p>
+            </form>
         </main>
     </div>
 
@@ -386,18 +468,41 @@
             }
         ];
 
+        // Función para cambiar de pestañas (Actualizada para soportar Contacto)
         function cambiarVista(vista) {
+            // Ocultar todas las vistas
             document.getElementById('vista-inicio').classList.remove('active');
             document.getElementById('vista-indice').classList.remove('active');
+            document.getElementById('vista-contacto').classList.remove('active');
+            
+            // Quitar clase activa de todos los botones
             document.getElementById('btn-inicio').classList.remove('active');
             document.getElementById('btn-indice').classList.remove('active');
+            document.getElementById('btn-contacto').classList.remove('active');
 
+            // Activar la vista y botón seleccionados
             document.getElementById('vista-' + vista).classList.add('active');
             document.getElementById('btn-' + vista).classList.add('active');
 
             if(vista === 'indice') {
                 volverAlIndice();
             }
+        }
+
+        // Función para preparar y abrir el cliente de correo
+        function prepararCorreo(event) {
+            event.preventDefault(); // Evita que la página se recargue
+            
+            const nombre = document.getElementById('contacto-nombre').value;
+            const asunto = document.getElementById('contacto-asunto').value;
+            const mensaje = document.getElementById('contacto-mensaje').value;
+            
+            const destinatarios = "reudejovenesconce@gmail.com,andres.paiva.medina@gmail.com";
+            const subjectEncoded = encodeURIComponent(`Consulta Web de ${nombre}: ${asunto}`);
+            const bodyEncoded = encodeURIComponent(`Hola,\n\nMi nombre es ${nombre} y este es mi mensaje:\n\n${mensaje}\n\n---\nEnviado desde la página web Reunión de Jóvenes.`);
+            
+            // Redirige al cliente de correo por defecto
+            window.location.href = `mailto:${destinatarios}?subject=${subjectEncoded}&body=${bodyEncoded}`;
         }
 
         function cargarIndice() {
