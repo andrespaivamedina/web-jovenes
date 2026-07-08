@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reunión de Jóvenes Concepción</title>
+    <style>
+        /* Tema sobrio, tranquilo y elegante */
+        :root {
+            --bg-color: #f7f6f2; 
+            --text-color: #2c3e50; 
+            --accent-color: #5d6d7e; 
+            --card-bg: #ffffff;
+            --border: #e0ded7;
+        }
+
+        body {
+            font-family: 'Georgia', serif; 
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Adaptable: Contenedor principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-weight: normal;
+            color: var(--text-color);
+            margin: 0 0 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-family: inherit;
+            color: var(--accent-color);
+            cursor: pointer;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        nav button:hover, nav button.active {
+            border-bottom: 2px solid var(--text-color);
+            color: var(--text-color);
+        }
+
+        /* Vistas (Pestañas) */
+        .view-section {
+            display: none;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid var(--border);
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* Estilos de la nueva página de Inicio */
+        .bienvenida {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            font-family: inherit;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .btn-link:hover {
+            background-color: var(--text-color);
+        }
+
+        /* Cuadro elegante de horarios */
+        .schedule-box {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .schedule-box h3 {
+            margin-top: 0;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .schedule-box h4 {
+            font-weight: normal;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .schedule-box ul {
+            margin-top: 0;
+            padding-left: 20px;
+        }
+
+        .schedule-box li {
+            margin-bottom: 10px;
+        }
+
+        /* Índice y Buscador de coros */
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .coros-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .coros-list li {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .coros-list li:hover {
+            background-color: var(--bg-color);
+        }
+
+        .coros-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Vista de Letra del Coro */
+        #vista-letra {
+            display: none;
+            text-align: center;
+        }
+
+        .letra-contenido {
+            white-space: pre-line;
+            font-size: 18px;
+            margin: 30px 0;
+            line-height: 1.8;
+        }
+
+        .btn-volver {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            border-radius: 4px;
+            color: var(--text-color);
+        }
+
+        .btn-volver:hover {
+            background-color: var(--bg-color);
+        }
+
+        /* Adaptabilidad para móviles */
+        @media (max-width: 600px) {
+            .view-section {
+                padding: 20px 15px;
+            }
+            header {
+                padding: 20px 10px;
+            }
+            .btn-link {
+                width: 100%;
+            }
+            .schedule-box {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- (1) Título Actualizado -->
+        <h1>Reunión de Jóvenes Concepción</h1>
+        <p><i>Recursos, Horarios y Coros del Evangelio</i></p>
+    </header>
+
+    <div class="container">
+        <nav>
+            <button id="btn-inicio" class="active" onclick="cambiarVista('inicio')">Inicio</button>
+            <button id="btn-indice" onclick="cambiarVista('indice')">Índice de Coros</button>
+        </nav>
+
+        <!-- Página de Inicio Modificada -->
+        <main id="vista-inicio" class="view-section active">
+            
+            <!-- (2) Párrafo de bienvenida -->
+            <p class="bienvenida">
+                Bienvenidos a esta página web que contiene los coros que tenemos en nuestro repertorio actual, además de links a los canales de YouTube y Spotify.
+            </p>
+
+            <!-- Enlaces a redes -->
+            <div class="links-container">
+                <!-- (3) Link a canal de YouTube Jóvenes -->
+                <a href="https://www.youtube.com/@Reuni%C3%B3ndeJ%C3%B3venesConcepci%C3%B3n" target="_blank" class="btn-link">YouTube Reunión de Jóvenes Concepción</a>
+                
+                <!-- (4) Link a Spotify Jóvenes -->
+                <a href="https://open.spotify.com/show/6iiqN6Trkqk8Gn9zcAZ67v" target="_blank" class="btn-link">Spotify Reunión de Jóvenes Concepción</a>
+                
+                <!-- (5) Link a canal Asamblea de Concepción -->
+                <a href="https://www.youtube.com/@cristianosconcepcion4299" target="_blank" class="btn-link">YouTube Oficial Asamblea de Concepción</a>
+            </div>
+
+            <!-- (6) Horarios de Reunión en un cuadro elegante -->
+            <div class="schedule-box">
+                <h3>Horarios de Reunión</h3>
+                <p><strong>Reunión de Jóvenes:</strong> sábado por medio, de 17.00 a 19.30 hrs, con once incluida.</p>
+                
+                <h4>Reuniones regulares:</h4>
+                <ul>
+                    <li><strong>Domingo:</strong> 09.30 hrs Cena del Señor, 11:00 hrs Escuela Dominical, 17:00 hrs Predicación del Evangelio Virtual.</li>
+                    <li><strong>Martes:</strong> 19.00 hrs Enseñanza de la Biblia.</li>
+                    <li><strong>Jueves:</strong> 19.00 hrs Oración y Estudio Bíblico.</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Índice de Coros -->
+        <main id="vista-indice" class="view-section">
+            <div id="contenedor-lista">
+                <h2 style="text-align: center; font-weight: normal; margin-top:0;">Repertorio de Coros</h2>
+                <input type="text" id="buscador" class="search-bar" placeholder="Buscar un coro por título..." onkeyup="filtrarCoros()">
+                <ul id="lista-coros" class="coros-list">
+                    <!-- Los coros se cargarán aquí -->
+                </ul>
+            </div>
+
+            <!-- Vista individual del coro seleccionado -->
+            <div id="vista-letra">
+                <button class="btn-volver" onclick="volverAlIndice()">← Volver al índice</button>
+                <h2 id="titulo-coro-actual" style="font-weight: normal; margin-top: 20px;"></h2>
+                <div id="letra-coro-actual" class="letra-contenido"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const baseDeDatosCoros = [
+            {
+                id: 1,
+                titulo: "Yendo Saulo",
+                letra: "Yendo Saulo camino a Damasco\nUn resplandor le cegó\n// Y cayendo en tierra\nUna voz se escuchó //\n\nSaulo, Saulo, ¿por qué me persigues?\nSo oyó una voz celestial\n// A quién tu persigues\nPues a Él, le servirás //"
+            },
+            {
+                id: 2,
+                titulo: "Yo tengo gozo",
+                letra: "Yo tengo gozo, gozo, en mi corazón,\n// en mi corazón //\nYo tengo gozo, gozo, en mi corazón,\n¡gloria al Salvador!\n\nYo tengo paz perfecta en mi corazón,\n// en mi corazón //\nYo tengo paz perfecta en mi corazón,\n¡gloria al Salvador!\n\nYo tengo alegría en mi corazón,\n// en mi corazón //\nYo tengo alegría en mi corazón,\n¡gloria al Salvador!\n\nYo tengo gozo, paz y alegría en mi corazón,\n// en mi corazón //\nYo tengo gozo, paz y alegría en mi corazón,\n¡gloria al Salvador!"
+            },
+            {
+                id: 3,
+                titulo: "Yo vivo Señor",
+                letra: "Yo vivo Señor porque Tú vives\nPorque Tú vives Señor es que yo vivo\nMe das consuelo, me das abrigo\nY en la aflicción, mi Señor está conmigo\n\nSoy salvo, Señor, pues me salvaste\npues me salvaste, Señor eternamente.\nYo voy al cielo, voy a la gloria\nporque oh Señor, Tú me diste la victoria"
+            },
+            {
+                id: 4,
+                titulo: "Zaqueo",
+                letra: "Zaqueo, pequeñito era,\ny a causa de la multitud,\na un sicómoro subió,\n//pues a Cristo quiso ver//\n\nY cuando el Salvador pasó,\ny el árbol contempló,\nÉl exclamó: ¡Zaqueo, ven!\nA tu casa yo iré,\ny contigo cenaré.\n\nZaqueo fue a su casa,\ny allí encontró al Señor,\ny devolvió con creces,\n//lo que antes defraudó//\n\nSi tú como Zaqueo,\naceptas al Señor,\ntendrás ahora mismo,\n//puro y limpio corazón//"
+            },
+            {
+                id: 5,
+                titulo: "¿Para qué pecar?",
+                letra: "¿Para qué pecar si soy salvo,\nsi ya tengo tanta luz?\n¿Para qué pecar si la vida\nDios me ha dado en Jesús?\n¿Para qué pecar si el infierno\nsolo espera al pecador?\n// ¿Para qué pecar? ¿Para qué pecar?\n¿Para qué pecar contra Dios? //"
+            },
+            {
+                id: 6,
+                titulo: "¿Quién es Él?",
+                letra: "¿Quién es Él, que con baldón,\nnace fuera del mesón?\nEs Jesús, ¡oh qué historia!\nEs Jesús, el Rey de gloria,\nA sus pies es mi lugar\nAlabando sin cesar.\n\n¿Quién es Él, por hombres mil,\nlevantado en cruz tan vil?\nEs Jesús, ¡oh qué historia!\nEs Jesús, el Rey de gloria,\nA sus pies es mi lugar\nAlabando sin cesar.\n\n¿Quién es Él, que al resucitar,\npoder tiene para salvar?\nEs Jesús, ¡oh qué historia!\nEs Jesús, el Rey de gloria,\nA sus pies es mi lugar\nAlabando sin cesar."
+            },
+            {
+                id: 7,
+                titulo: "¿Quién hizo lindas flores?",
+                letra: "¿Quién hizo lindas flores?\nNi tú, ni yo, ¿pues quién?\n¿Quién hizo lindas flores?\nTan solo el Señor.\n\n¿Quién hizo los pececitos?\nNi tú, ni yo, ¿pues quién?\n¿Quién hizo los pececitos?\nTan solo el Señor.\n\n¿Quién hizo a los animales?\nNi tú, ni yo, ¿pues quién?\n¿Quién hizo a los animales?\nTan solo el Señor.\n\n¿Quién hizo a los niñitos?\nNi tú, ni yo, ¿pues quién?\n¿Quién hizo a los niñitos?\nTan solo el Señor.\n\n¿Quién puede a ti salvarte?\nNi tú, ni yo, ¿pues quién?\n¿Quién puede a ti salvarte?\nTan solo el Señor."
+            },
+            {
+                id: 8,
+                titulo: "0. AVISO PRÓXIMA REU",
+                letra: "PRÓXIMA REUNIÓN:\nSábado 12 de agosto\n17:00 HRS."
+            },
+            {
+                id: 9,
+                titulo: "0. THE FINAL COUNTDOWN",
+                letra: "LA REUNIÓN COMENZARÁ\nA LAS 18:50"
+            },
+            {
+                id: 10,
+                titulo: "A combatir",
+                letra: "¡A combatir! resuena la guerrera voz\nDel Salvador, que hoy llamando está.\nSin desmayar, seguidle siempre con valor,\nY la victoria plena os dará.\n\n¡A la batalla, oh fiel Cristiano!\nCon el escudo de la cruz;\nSé buen soldado, pues a tu lado,\nestá el príncipe Jesús.\nÉl con su gracia te sostiene,\nY con potencia sin igual;\nSu brazo extiende, y te defiende,\nEn esta lucha contra el mal.\n\nAl Rey de reyes, nuestro Salvador Jesús,\nHonor y gloria todos tributad,\nPues ya los suyos gozan de Su plenitud,\nY pronto reinarán en santidad."
+            }
+        ];
+
+        function cambiarVista(vista) {
+            document.getElementById('vista-inicio').classList.remove('active');
+            document.getElementById('vista-indice').classList.remove('active');
+            document.getElementById('btn-inicio').classList.remove('active');
+            document.getElementById('btn-indice').classList.remove('active');
+
+            document.getElementById('vista-' + vista).classList.add('active');
+            document.getElementById('btn-' + vista).classList.add('active');
+
+            if(vista === 'indice') {
+                volverAlIndice();
+            }
+        }
+
+        function cargarIndice() {
+            const lista = document.getElementById('lista-coros');
+            lista.innerHTML = ''; 
+            
+            baseDeDatosCoros.forEach(coro => {
+                const li = document.createElement('li');
+                li.textContent = coro.titulo;
+                li.onclick = () => mostrarLetra(coro.id);
+                lista.appendChild(li);
+            });
+        }
+
+        function filtrarCoros() {
+            const textoBusqueda = document.getElementById('buscador').value.toLowerCase();
+            const items = document.getElementById('lista-coros').getElementsByTagName('li');
+
+            for (let i = 0; i < items.length; i++) {
+                const textoItem = items[i].textContent || items[i].innerText;
+                if (textoItem.toLowerCase().indexOf(textoBusqueda) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function mostrarLetra(id) {
+            const coro = baseDeDatosCoros.find(c => c.id === id);
+            if(coro) {
+                document.getElementById('contenedor-lista').style.display = 'none';
+                document.getElementById('vista-letra').style.display = 'block';
+                
+                document.getElementById('titulo-coro-actual').textContent = coro.titulo;
+                document.getElementById('letra-coro-actual').textContent = coro.letra;
+            }
+        }
+
+        function volverAlIndice() {
+            document.getElementById('vista-letra').style.display = 'none';
+            document.getElementById('contenedor-lista').style.display = 'block';
+            document.getElementById('buscador').value = ''; 
+            filtrarCoros(); 
+        }
+
+        window.onload = cargarIndice;
+    </script>
+</body>
+</html>
