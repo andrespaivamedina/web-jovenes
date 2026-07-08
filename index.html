@@ -335,7 +335,7 @@
     </header>
 
     <div class="container">
-        <!-- Navegación actualizada con 3 pestañas -->
+        <!-- Navegación con 3 pestañas -->
         <nav>
             <button id="btn-inicio" class="active" onclick="cambiarVista('inicio')">Inicio</button>
             <button id="btn-indice" onclick="cambiarVista('indice')">Índice de Coros</button>
@@ -388,28 +388,29 @@
             </div>
         </main>
 
-        <!-- Pestaña 3: Contacto (NUEVA) -->
+        <!-- Pestaña 3: Contacto (Configurada con Formspree) -->
         <main id="vista-contacto" class="view-section">
             <h2 style="text-align: center; font-weight: normal; margin-top:0; color: var(--accent-color);">Contacto y Preguntas</h2>
             <p style="text-align: center; margin-bottom: 30px;">Si tienes alguna pregunta o deseas comunicarte con nosotros, escríbenos llenando el siguiente formulario.</p>
             
-            <form onsubmit="prepararCorreo(event)">
+            <form action="https://formspree.io/f/mwvddkay" method="POST">
                 <div class="form-group">
                     <label for="contacto-nombre">Tu nombre:</label>
-                    <input type="text" id="contacto-nombre" placeholder="Ej. Juan Pérez" required>
+                    <input type="text" id="contacto-nombre" name="Nombre" placeholder="Ej. Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="contacto-correo">Tu correo electrónico (para responderte):</label>
+                    <input type="email" id="contacto-correo" name="Email" placeholder="Ej. juan@correo.com" required>
                 </div>
                 <div class="form-group">
                     <label for="contacto-asunto">Asunto:</label>
-                    <input type="text" id="contacto-asunto" placeholder="Ej. Pregunta sobre reuniones" required>
+                    <input type="text" id="contacto-asunto" name="Asunto" placeholder="Ej. Pregunta sobre reuniones" required>
                 </div>
                 <div class="form-group">
                     <label for="contacto-mensaje">Tu mensaje:</label>
-                    <textarea id="contacto-mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    <textarea id="contacto-mensaje" name="Mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
                 </div>
-                <button type="submit" class="btn-submit">Preparar Mensaje</button>
-                <p style="font-size: 13px; text-align: center; color: var(--accent-light); margin-top: 15px;">
-                    * Al hacer clic, se abrirá tu aplicación de correo (Gmail, Outlook, etc.) con el mensaje listo para ser enviado a nuestros correos oficiales.
-                </p>
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
             </form>
         </main>
     </div>
@@ -468,41 +469,22 @@
             }
         ];
 
-        // Función para cambiar de pestañas (Actualizada para soportar Contacto)
+        // Función para cambiar de pestañas
         function cambiarVista(vista) {
-            // Ocultar todas las vistas
             document.getElementById('vista-inicio').classList.remove('active');
             document.getElementById('vista-indice').classList.remove('active');
             document.getElementById('vista-contacto').classList.remove('active');
             
-            // Quitar clase activa de todos los botones
             document.getElementById('btn-inicio').classList.remove('active');
             document.getElementById('btn-indice').classList.remove('active');
             document.getElementById('btn-contacto').classList.remove('active');
 
-            // Activar la vista y botón seleccionados
             document.getElementById('vista-' + vista).classList.add('active');
             document.getElementById('btn-' + vista).classList.add('active');
 
             if(vista === 'indice') {
                 volverAlIndice();
             }
-        }
-
-        // Función para preparar y abrir el cliente de correo
-        function prepararCorreo(event) {
-            event.preventDefault(); // Evita que la página se recargue
-            
-            const nombre = document.getElementById('contacto-nombre').value;
-            const asunto = document.getElementById('contacto-asunto').value;
-            const mensaje = document.getElementById('contacto-mensaje').value;
-            
-            const destinatarios = "reudejovenesconce@gmail.com,andres.paiva.medina@gmail.com";
-            const subjectEncoded = encodeURIComponent(`Consulta Web de ${nombre}: ${asunto}`);
-            const bodyEncoded = encodeURIComponent(`Hola,\n\nMi nombre es ${nombre} y este es mi mensaje:\n\n${mensaje}\n\n---\nEnviado desde la página web Reunión de Jóvenes.`);
-            
-            // Redirige al cliente de correo por defecto
-            window.location.href = `mailto:${destinatarios}?subject=${subjectEncoded}&body=${bodyEncoded}`;
         }
 
         function cargarIndice() {
