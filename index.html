@@ -150,6 +150,14 @@
         .schedule-box li {
             margin-bottom: 10px;
         }
+        
+        .fechas-2026 {
+            font-size: 0.9em;
+            color: var(--accent-color);
+            line-height: 1.8;
+            margin-top: -10px;
+            margin-bottom: 25px;
+        }
 
         /* Índice y Buscador de coros */
         .search-bar {
@@ -235,7 +243,6 @@
 <body>
 
     <header>
-        <!-- (1) Título Actualizado -->
         <h1>Reunión de Jóvenes Concepción</h1>
         <p><i>Recursos, Horarios y Coros del Evangelio</i></p>
     </header>
@@ -246,30 +253,25 @@
             <button id="btn-indice" onclick="cambiarVista('indice')">Índice de Coros</button>
         </nav>
 
-        <!-- Página de Inicio Modificada -->
         <main id="vista-inicio" class="view-section active">
             
-            <!-- (2) Párrafo de bienvenida -->
             <p class="bienvenida">
                 Bienvenidos a esta página web que contiene los coros que tenemos en nuestro repertorio actual, además de links a los canales de YouTube y Spotify.
             </p>
 
-            <!-- Enlaces a redes -->
             <div class="links-container">
-                <!-- (3) Link a canal de YouTube Jóvenes -->
-                <a href="https://www.youtube.com/@Reuni%C3%B3ndeJ%C3%B3venesConcepci%C3%B3n" target="_blank" class="btn-link">YouTube Reunión de Jóvenes Concepción</a>
-                
-                <!-- (4) Link a Spotify Jóvenes -->
-                <a href="https://open.spotify.com/show/6iiqN6Trkqk8Gn9zcAZ67v" target="_blank" class="btn-link">Spotify Reunión de Jóvenes Concepción</a>
-                
-                <!-- (5) Link a canal Asamblea de Concepción -->
-                <a href="https://www.youtube.com/@cristianosconcepcion4299" target="_blank" class="btn-link">YouTube Oficial Asamblea de Concepción</a>
+                <a href="https://www.youtube.com/@Reuni%C3%B3ndeJ%C3%B3venesConcepci%C3%B3n" target="_blank" class="btn-link">YouTube Jóvenes Concepción</a>
+                <a href="https://open.spotify.com/show/6iiqN6Trkqk8Gn9zcAZ67v" target="_blank" class="btn-link">Spotify Jóvenes Concepción</a>
+                <a href="https://www.youtube.com/@cristianosconcepcion4299" target="_blank" class="btn-link">YouTube Oficial Asamblea</a>
             </div>
 
-            <!-- (6) Horarios de Reunión en un cuadro elegante -->
+            <!-- Horarios de Reunión Actualizados -->
             <div class="schedule-box">
                 <h3>Horarios de Reunión</h3>
                 <p><strong>Reunión de Jóvenes:</strong> sábado por medio, de 17.00 a 19.30 hrs, con once incluida.</p>
+                <p class="fechas-2026">
+                    <strong>Fechas 2026:</strong> 28/03/2026 - 11/04/2026 - 25/04/2026 - 09/05/2026 - 23/05/2026 - 06/06/2026 - 20/06/2026 - 04/07/2026 - 18/07/2026 - 01/08/2026 - 15/08/2026 - 29/08/2026 - 12/09/2026 - 26/09/2026 - 10/10/2026 - 24/10/2026 - 07/11/2026 - 21/11/2026
+                </p>
                 
                 <h4>Reuniones regulares:</h4>
                 <ul>
@@ -280,7 +282,6 @@
             </div>
         </main>
 
-        <!-- Índice de Coros -->
         <main id="vista-indice" class="view-section">
             <div id="contenedor-lista">
                 <h2 style="text-align: center; font-weight: normal; margin-top:0;">Repertorio de Coros</h2>
@@ -290,7 +291,6 @@
                 </ul>
             </div>
 
-            <!-- Vista individual del coro seleccionado -->
             <div id="vista-letra">
                 <button class="btn-volver" onclick="volverAlIndice()">← Volver al índice</button>
                 <h2 id="titulo-coro-actual" style="font-weight: normal; margin-top: 20px;"></h2>
